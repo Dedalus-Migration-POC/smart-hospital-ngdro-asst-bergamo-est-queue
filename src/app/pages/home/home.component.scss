@@ -1,0 +1,27 @@
+.ticket-info-row {
+  flex-direction: row;
+
+  .ticket-info-value {
+    display: flex;
+    width: 30%;
+  }
+  .ticket-info-label {
+    display: flex;
+    width: 70%;
+  }
+}
+
+@media screen and (max-width: 370px) {
+  .ticket-info-row {
+    flex-direction: column;
+
+    .ticket-info-value {
+      width: 100%;
+      justify-content: center;
+    }
+    .ticket-info-label {
+      width: 100%;
+      justify-content: center;
+    }
+  }
+}

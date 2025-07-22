@@ -1,0 +1,115 @@
+<div class="row justify-content-center mt-5">
+  <div class="col-12 col-lg-8">
+    <div class="card card-teaser shadow mb-5">
+      <div class="card-body" *ngIf="data?.ticketNum">
+        <ng-container
+          *ngIf="!data.dateEnd && !data.counter && !data.dateServed"
+        >
+          <div
+            class="card-row d-flex flex-row mb-1 w-100 justify-content-center"
+          >
+            Il tuo ticket è:
+          </div>
+          <div
+            class="card-row d-flex flex-row mb-1 w-100 justify-content-center fs-1"
+          >
+            {{ data.ticketNum }}
+          </div>
+          <div class="card-row d-flex mb-1 w-100 ticket-info-row">
+            <div class="ticket-info-label">Tempo di attesa stimato:</div>
+            <div class="ticket-info-value">
+              {{ data.waitingTime / 60 }} minuti
+            </div>
+          </div>
+          <div class="card-row d-flex mb-1 w-100 ticket-info-row">
+            <div class="ticket-info-label">Persone in attesa:</div>
+            <div class="ticket-info-value">
+              {{ data.customersInQueue }}
+            </div>
+          </div>
+          <div class="card-row d-flex mb-1 w-100 ticket-info-row">
+            <div class="ticket-info-label">Ultimo ticket servito:</div>
+            <div class="ticket-info-value">
+              {{ data.lastServed }}
+            </div>
+          </div>
+        </ng-container>
+
+        <ng-container *ngIf="data.dateEnd && !data.rating">
+          <div
+            class="card-row d-flex flex-row mb-1 w-100 justify-content-center"
+          >
+            Il tuo ticket
+          </div>
+          <div
+            class="card-row d-flex flex-row mb-1 w-100 justify-content-center fs-1"
+          >
+            {{ data.ticketNum }}
+          </div>
+          <div
+            class="card-row d-flex flex-row mb-1 w-100 justify-content-center"
+          >
+            è stato servito.
+          </div>
+          <div
+            class="card-row d-flex flex-row mb-1 w-100 justify-content-center text-center"
+          >
+            Qual'e' il tuo gradimento per questo servizio?
+          </div>
+          <div
+            class="card-row d-flex flex-row mb-1 w-100 justify-content-center"
+          >
+            <app-rating></app-rating>
+          </div>
+        </ng-container>
+
+        <ng-container *ngIf="data.dateEnd && data.rating">
+          <div
+            class="card-row d-flex flex-row mb-1 w-100 justify-content-center"
+          >
+            Il tuo ticket
+          </div>
+          <div
+            class="card-row d-flex flex-row mb-1 w-100 justify-content-center fs-1"
+          >
+            {{ data.ticketNum }}
+          </div>
+          <div
+            class="card-row d-flex flex-row mb-1 w-100 justify-content-center"
+          >
+            è stato servito.
+          </div>
+          <div
+            class="card-row d-flex flex-row mb-1 w-100 justify-content-center text-center"
+          >
+            Ti ringraziamo per averci dato il tuo feedback sul servizio!
+          </div>
+        </ng-container>
+
+        <ng-container *ngIf="data.counter && data.dateServed && !data.dateEnd">
+          <div
+            class="card-row d-flex flex-row mb-1 w-100 justify-content-center"
+          >
+            Il tuo ticket
+          </div>
+          <div
+            class="card-row d-flex flex-row mb-1 w-100 justify-content-center fs-1"
+          >
+            {{ data.ticketNum }}
+          </div>
+          <div
+            class="card-row d-flex flex-row mb-1 w-100 justify-content-center"
+          >
+            è stato chiamato allo sportello
+          </div>
+          <div
+            class="card-row d-flex flex-row mb-1 w-100 justify-content-center fs-2"
+          >
+            {{ data.counter }}
+          </div>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+</div>
+<pre>{{ data | json }}</pre>

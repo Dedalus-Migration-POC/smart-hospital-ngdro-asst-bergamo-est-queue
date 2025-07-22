@@ -1,0 +1,17 @@
+.it-header-center-wrapper {
+  box-shadow: 5px -13px 34px #05794a;
+}
+
+.it-brand-wrapper {
+  width: 15%;
+  min-width: 154px;
+  > a {
+    width: 100%;
+    .header-logo {
+      width: 100%;
+      @media screen and (max-width: 991px) {
+        width: 75%;
+      }
+    }
+  }
+}

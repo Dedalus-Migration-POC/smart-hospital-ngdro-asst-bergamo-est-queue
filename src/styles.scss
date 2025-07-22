@@ -1,1 +1,9 @@
-/* You can add global styles to this file, and also import other style files */
+$primary: #05794a !default;
+
+$header-slim-bg-color: white !default;
+$header-slim-text-color: $primary !default;
+
+$font-family-serif: "Titillium Web", "Montserrat", "Lora", Roboto !default;
+
+// Importazione libreria SCSS di bootstrap-italia
+@import "bootstrap-italia/src/scss/bootstrap-italia";
