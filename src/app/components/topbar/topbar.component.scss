@@ -1,17 +1,18 @@
-.it-header-center-wrapper {
-  box-shadow: 5px -13px 34px #05794a;
+.it-header-center-content-wrapper {
+  justify-content: center;
+  display: flex;
+  padding-top: 2rem;
 }
 
 .it-brand-wrapper {
   width: 15%;
   min-width: 154px;
-  > a {
+  > .logo-wrapper {
     width: 100%;
+    justify-content: center;
+    display: flex;
     .header-logo {
       width: 100%;
-      @media screen and (max-width: 991px) {
-        width: 75%;
-      }
     }
   }
 }

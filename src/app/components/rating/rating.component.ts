@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import {
   FormControl,
   FormGroup,
@@ -16,14 +16,10 @@ import {
   styleUrl: './rating.component.scss'
 })
 export class RatingComponent {
-
-  formGroup = new FormGroup({
-    rating: new FormControl(''),
-
-  })
+  @Input() formGroup!: FormGroup
+  @Output() sendRating = new EventEmitter()
 
   onSend() {
-    console.log('+++form', this.formGroup.value);
-
+    this.sendRating.emit()
   }
 }

@@ -1,8 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Services } from '../../services/serivces';
+import { Services, TicketDisplayInfo } from '../../services/serivces';
 import { RatingComponent } from '../../components/rating/rating.component';
+import { md5 } from 'js-md5';
+import { FormControl, FormGroup } from '@angular/forms';
+
+
 
 @Component({
   selector: 'app-home',
@@ -15,24 +19,76 @@ export class HomeComponent implements OnInit {
   constructor(private route: ActivatedRoute,) { }
   services = inject(Services);
 
-  //branchId=45&queueId=12&ticketNumber=CA455&hash=md5
-  branchId: any
-  queueId: any
-  ticketNumber: any
+  //?kioskId=TI4C-71-100
+  // &ticketNum=CU169
+  // &hash=ab41929299365bcd2bf9d5a7e511ea0a
+  formGroup = new FormGroup({
+    rating: new FormControl(''),
 
-  data: any
+  })
+
+
+  secretKey = 'xyz456satisfactionKey!'
+  data: TicketDisplayInfo | null = null
+  ratingData: any
+  updateDateTime: any
+  error = false
+  kioskId: string = ''
   ngOnInit(): void {
-    this.route.queryParams.subscribe(params => {
-      this.loadCourses(params['branchId'], params['queueId'], params['ticketNumber'])
-      // setInterval(() => this.loadCourses(params['branchId'], params['queueId'], params['ticketNumber']), 5000);
+    this.pollingData()
+  }
 
+  pollingData() {
+    this.route.queryParams.subscribe(params => {
+      this.kioskId = params['kioskId']
+      this.loadTicket({
+        kioskId: this.kioskId,
+        ticketNum: params['ticketNum'],
+        hash: params['hash']
+      })
+
+      setInterval(() => {
+        if (this.data && !this.data.dateEnd) {
+          const md5Hash = md5(this.secretKey + this.kioskId + this.data?.ticketNum).toUpperCase()
+          this.loadTicket({ kioskId: this.kioskId, ticketNum: this.data?.ticketNum, hash: md5Hash })
+        }
+      }, 5000)
     });
   }
 
-  async loadCourses(branchId: any, queueId: any, ticketNumber: any) {
+  beep() {
+    var snd = new Audio("https://media.geeksforgeeks.org/wp-content/uploads/20190531135120/beep.mp3");
+    snd.play();
+  }
+
+  async loadTicket({ kioskId, ticketNum, hash }: any) {
     try {
-      const ticket = await this.services.getData(branchId, queueId, ticketNumber);
+      const ticket = await this.services.getData(kioskId, ticketNum, hash);
       this.data = ticket
+      this.updateDateTime = new Date();
+      this.error = false
+      if (this.data?.ticketStatus === 'CALLING') {
+        this.beep()
+      }
+    }
+    catch (err) {
+      console.error(err);
+      this.error = true
+    }
+  }
+
+  sendRating() {
+    const md5Hash = md5(this.secretKey + this.kioskId + this.data?.ticketNum).toUpperCase()
+    this.sendRatingRequest({ kioskId: this.kioskId, ticketNum: this.data?.ticketNum, rating: this.formGroup.value.rating, hash: md5Hash })
+
+  }
+  async sendRatingRequest({ kioskId, ticketNum, rating, hash }: any) {
+    try {
+      const ratingTicket = await this.services.sendRating(kioskId, ticketNum, rating, hash);
+      this.ratingData = ratingTicket
+      if (ratingTicket) {
+        this.loadTicket({ kioskId: kioskId, ticketNum: ticketNum, hash: hash })
+      }
     }
     catch (err) {
       console.error(err);
