@@ -22,7 +22,7 @@ export class Services {
 
     http = inject(HttpClient);
 
-    private readonly IS_DEV = true
+    private readonly IS_DEV = false
 
     async getData(kioskId: string, ticketNum: string, hash: string): Promise<any> {
         if (this.IS_DEV) {
