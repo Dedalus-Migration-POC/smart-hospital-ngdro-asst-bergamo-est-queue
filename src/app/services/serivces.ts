@@ -35,7 +35,7 @@ export class Services {
         const options =
             { params: new HttpParams().set('kioskId', kioskId).set('ticketNum', ticketNum).set('hash', hash) }
         const data$ =
-            this.http.get<any>(window.location.origin + '/start/extended/display-ticketInfo', options);
+            this.http.get<any>(window.location.origin + '/start-ms/start/extended/display-ticketInfo', options);
         const response = await firstValueFrom(data$);
         return response;
     }
@@ -56,7 +56,7 @@ export class Services {
         const options =
             { params: new HttpParams().set('hash', hash) }
         const data$ =
-            this.http.post<any>(window.location.origin + '/start/extended/customer-satisfaction', body, options);
+            this.http.post<any>(window.location.origin + '/start-ms/start/extended/customer-satisfaction', body, options);
         const response = await firstValueFrom(data$);
         return response;
     }
