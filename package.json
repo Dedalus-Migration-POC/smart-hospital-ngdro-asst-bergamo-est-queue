@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
+    "build": "ng build --configuration=production --deploy-url=https://cdn.smarthospital.cloud/asst-bergamo-est-queue/production/v1.0.0/ --base-href=/ui",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },
