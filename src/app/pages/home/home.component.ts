@@ -34,6 +34,7 @@ export class HomeComponent implements OnInit {
   updateDateTime: any
   error = false
   kioskId: string = ''
+  hash: string = ''
   ngOnInit(): void {
     this.pollingData()
   }
@@ -41,16 +42,17 @@ export class HomeComponent implements OnInit {
   pollingData() {
     this.route.queryParams.subscribe(params => {
       this.kioskId = params['kioskId']
+      this.hash = params['hash']
       this.loadTicket({
         kioskId: this.kioskId,
         ticketNum: params['ticketNum'],
-        hash: params['hash']
+        hash: this.hash
       })
 
       setInterval(() => {
         if (this.data && !this.data.dateEnd) {
-          const md5Hash = md5(this.secretKey + this.kioskId + this.data?.ticketNum).toUpperCase()
-          this.loadTicket({ kioskId: this.kioskId, ticketNum: this.data?.ticketNum, hash: md5Hash })
+          // const md5Hash = md5(this.secretKey + this.kioskId + this.data?.ticketNum).toUpperCase()
+          this.loadTicket({ kioskId: this.kioskId, ticketNum: this.data?.ticketNum, hash: this.hash })
         }
       }, 5000)
     });
@@ -78,8 +80,8 @@ export class HomeComponent implements OnInit {
   }
 
   sendRating() {
-    const md5Hash = md5(this.secretKey + this.kioskId + this.data?.ticketNum).toUpperCase()
-    this.sendRatingRequest({ kioskId: this.kioskId, ticketNum: this.data?.ticketNum, rating: this.formGroup.value.rating, hash: md5Hash })
+    // const md5Hash = md5(this.secretKey + this.kioskId + this.data?.ticketNum).toUpperCase()
+    this.sendRatingRequest({ kioskId: this.kioskId, ticketNum: this.data?.ticketNum, rating: this.formGroup.value.rating, hash: this.hash })
 
   }
   async sendRatingRequest({ kioskId, ticketNum, rating, hash }: any) {
