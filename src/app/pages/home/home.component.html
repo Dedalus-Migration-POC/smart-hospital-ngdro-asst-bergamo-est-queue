@@ -36,7 +36,7 @@
               Tempo di attesa stimato:
             </div>
             <div class="ticket-info-value">
-              {{ data.waitingTime / 60 }} minuti
+              {{ data.waitingTime / 60 | number : "1.0-0" }} minuti
             </div>
           </div>
           <div class="card-row d-flex mb-1 w-100 ticket-info-row">
@@ -154,6 +154,33 @@
             {{ data.counter }}
           </div>
         </ng-container>
+
+        <ng-container *ngIf="data.ticketStatus === 'ABSENT'">
+          <div class="logo-wrapper">
+            <img src="assets/rating.svg" class="header-logo" alt="" />
+          </div>
+          <div
+            class="card-row d-flex flex-row mb-1 w-100 justify-content-center h2 primary"
+          >
+            Il tuo ticket
+          </div>
+          <div
+            class="card-row d-flex flex-row mb-1 w-100 justify-content-center h2 primary"
+          >
+            {{ data.ticketNum }}
+          </div>
+          <div
+            class="card-row d-flex flex-row mb-4 w-100 justify-content-center"
+          >
+            è stato chiamato,
+          </div>
+          <div
+            class="card-row d-flex flex-row mb-1 w-100 justify-content-center text-center fs-2"
+          >
+            ma non si è presentato allo sportello
+          </div>
+        </ng-container>
+
         <div class="update-info">
           Ultimo aggiornamento:
           {{ updateDateTime | date : "dd/MM/yyyy HH:mm:ss" }}

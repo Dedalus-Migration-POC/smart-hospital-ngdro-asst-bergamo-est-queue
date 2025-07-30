@@ -64,7 +64,7 @@ export class Services {
 
 
 export const DATA_TICKET_1 = {
-    waitingTime: 600,
+    waitingTime: 1837,
     customersInQueue: 5,
     dateCreated: '2025-04-16T12:00:00+02:00',
     dateEnd: null,
@@ -73,7 +73,7 @@ export const DATA_TICKET_1 = {
     ticketNum: 'AS123',
     counter: null,
     dateServed: null,
-    ticketStatus: "WAITING",
+    ticketStatus: "ABSENT",
     if: "!data.dateEnd && !data.counter && !data.dateServed"
 }
 export const DATA_TICKET_2 = {
