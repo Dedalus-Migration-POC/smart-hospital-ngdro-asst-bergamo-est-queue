@@ -25,9 +25,9 @@ export class Services {
     private readonly IS_DEV = false
 
     async getData(kioskId: string, ticketNum: string, hash: string): Promise<any> {
-        if (this.IS_DEV) {
+        if (!this.IS_DEV) {
             const data$ =
-                of(DATA_TICKET_3).pipe(delay(500),)
+                of(DATA_TICKET_1).pipe(delay(500),)
             const response = await firstValueFrom(data$);
             return response;
         }

@@ -41,15 +41,20 @@
     }
   }
 }
-svg {
-  height: 24px;
-  width: 24px;
-  fill: #05794a;
+.ticket-info-label {
+  ::ng-deep svg {
+    height: 24px;
+    width: 24px;
+    fill: #05794a;
+  }
 }
+
 .error-icon {
-  height: 100px;
-  width: 100px;
-  fill: #ef0e0e;
+  ::ng-deep svg {
+    height: 70px;
+    width: 70px;
+    fill: #ef0e0e;
+  }
 }
 .logo-wrapper {
   text-align: center;

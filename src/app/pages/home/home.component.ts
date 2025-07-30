@@ -5,13 +5,14 @@ import { Services, TicketDisplayInfo } from '../../services/serivces';
 import { RatingComponent } from '../../components/rating/rating.component';
 import { md5 } from 'js-md5';
 import { FormControl, FormGroup } from '@angular/forms';
+import { DesignAngularKitModule } from 'design-angular-kit';
 
 
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, RatingComponent],
+  imports: [CommonModule, RatingComponent, DesignAngularKitModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })

@@ -27,9 +27,8 @@
           </div>
           <div class="card-row d-flex mb-1 w-100 ticket-info-row">
             <div class="ticket-info-label">
-              <svg class="icon">
-                <use href="assets/it-clock.svg"></use>
-              </svg>
+              <it-icon name="clock"></it-icon>
+
               Tempo di attesa stimato:
             </div>
             <div class="ticket-info-value">
@@ -38,9 +37,7 @@
           </div>
           <div class="card-row d-flex mb-1 w-100 ticket-info-row">
             <div class="ticket-info-label">
-              <svg class="icon">
-                <use href="assets/it-user.svg"></use>
-              </svg>
+              <it-icon name="user"></it-icon>
               Persone in attesa:
             </div>
             <div class="ticket-info-value">
@@ -49,9 +46,7 @@
           </div>
           <div class="card-row d-flex mb-1 w-100 ticket-info-row">
             <div class="ticket-info-label">
-              <svg class="icon">
-                <use href="assets/it-file.svg"></use>
-              </svg>
+              <it-icon name="file"></it-icon>
               Ultimo ticket servito:
             </div>
             <div class="ticket-info-value">
@@ -166,7 +161,7 @@
             è stato chiamato,
           </div>
           <div
-            class="card-row d-flex flex-row mb-1 w-100 justify-content-center text-center fs-2"
+            class="card-row d-flex flex-row mb-1 w-100 justify-content-center text-center"
           >
             ma non si è presentato allo sportello
           </div>
@@ -187,9 +182,7 @@
 
 <ng-container *ngIf="error">
   <div class="row justify-content-center mt-5 h2 p-4 text-center">
-    <svg class="icon error-icon">
-      <use href="../assets/it-error.svg"></use>
-    </svg>
+    <it-icon name="error" class="error-icon"></it-icon>
     <div>Ticket non trovato</div>
     <button class="btn btn-primary mt-5 retry-btn" (click)="pollingData()">
       Riprova
