@@ -85,11 +85,12 @@ export class HomeComponent implements OnInit {
     this.sendRatingRequest({ kioskId: this.kioskId, ticketNum: this.data?.ticketNum, rating: this.formGroup.value.rating, hash: this.hash })
 
   }
+
+
   async sendRatingRequest({ kioskId, ticketNum, rating, hash }: any) {
     try {
-      const ratingTicket = await this.services.sendRating(kioskId, ticketNum, rating, hash);
-      this.ratingData = ratingTicket
-      if (ratingTicket) {
+      const ratingResponse = await this.services.sendRating(kioskId, ticketNum, rating, hash);
+      if (ratingResponse?.status === 201) {
         this.loadTicket({ kioskId: kioskId, ticketNum: ticketNum, hash: hash })
       }
     }

@@ -1,5 +1,5 @@
 import { inject, Injectable } from "@angular/core";
-import { HttpClient, HttpParams } from "@angular/common/http";
+import { HttpClient, HttpParams, HttpResponse } from "@angular/common/http";
 import { delay, firstValueFrom, of } from "rxjs";
 
 export interface TicketDisplayInfo {
@@ -27,7 +27,7 @@ export class Services {
     async getData(kioskId: string, ticketNum: string, hash: string): Promise<any> {
         if (this.IS_DEV) {
             const data$ =
-                of(DATA_TICKET_1).pipe(delay(500),)
+                of(DATA_TICKET_3).pipe(delay(500),)
             const response = await firstValueFrom(data$);
             return response;
         }
@@ -41,24 +41,20 @@ export class Services {
     }
 
     async sendRating(kioskId: string, ticketNum: string, rating: number, hash: string): Promise<any> {
-        if (this.IS_DEV) {
-            const data$ =
-                of(true).pipe(delay(500),)
-            const response = await firstValueFrom(data$);
-            return response;
-        }
         const body = {
             ticketNum: ticketNum,
             rating: rating,
             kioskId: kioskId
         }
-
         const options =
-            { params: new HttpParams().set('hash', hash) }
-        const data$ =
-            this.http.post<any>(window.location.origin + '/start-ms/start/extended/customer-satisfaction', body, options);
-        const response = await firstValueFrom(data$);
-        return response;
+            { params: new HttpParams().set('hash', hash), observe: 'response' as const }
+        try {
+            const response: HttpResponse<any> = await firstValueFrom(this.http.post<any>(window.location.origin + '/start-ms/start/extended/customer-satisfaction', body, options))
+            return response;
+        } catch (error: any) {
+            console.error('Errore:', error.status, error.message);
+            throw error;
+        }
     }
 }
 
