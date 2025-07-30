@@ -73,7 +73,7 @@ export const DATA_TICKET_1 = {
     ticketNum: 'AS123',
     counter: null,
     dateServed: null,
-    ticketStatus: "ABSENT",
+    ticketStatus: "WAITING",
     if: "!data.dateEnd && !data.counter && !data.dateServed"
 }
 export const DATA_TICKET_2 = {
