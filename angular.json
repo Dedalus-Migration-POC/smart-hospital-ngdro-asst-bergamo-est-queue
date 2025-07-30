@@ -34,6 +34,11 @@
                 "glob": "**/*",
                 "input": "./node_modules/bootstrap-italia/",
                 "output": "/bootstrap-italia/"
+              },
+              {
+                "glob": "**/*",
+                "input": "node_modules/bootstrap-italia/dist/svg",
+                "output": "/assets/bootstrap-italia/svg"
               }
             ],
             "styles": ["src/styles.scss"],
@@ -114,12 +119,7 @@
             "polyfills": ["zone.js", "zone.js/testing"],
             "tsConfig": "tsconfig.spec.json",
             "inlineStyleLanguage": "scss",
-            "assets": [
-              {
-                "glob": "**/*",
-                "input": "public"
-              }
-            ],
+            "assets": ["src/favicon.ico", "src/assets"],
             "styles": ["src/styles.scss"],
             "scripts": []
           }
