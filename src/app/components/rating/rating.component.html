@@ -1,6 +1,12 @@
 <form [formGroup]="formGroup" class="ps-0 mt-4 d-flex flex-column">
   <it-rating formControlName="rating"></it-rating>
   <div class="d-flex justify-content-center mt-3">
-    <button class="btn btn-primary btn-xs" (click)="onSend()">Valuta</button>
+    <button
+      class="btn btn-primary btn-xs"
+      [disabled]="!formGroup.value.rating"
+      (click)="onSend()"
+    >
+      Valuta
+    </button>
   </div>
 </form>
